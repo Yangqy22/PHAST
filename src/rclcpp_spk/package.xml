@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>rclcpp_spk</name>
+  <version>0.0.1</version>
+  <description>PHAST priority-driven hierarchical ROS 2 C++ executor.</description>
+  <maintainer email="3170106234@zju.edu.cn">hongyi</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_export_depend>rmw</build_export_depend>
+
+  <build_depend>builtin_interfaces</build_depend>
+  <build_depend>rcl_interfaces</build_depend>
+  <build_depend>rosgraph_msgs</build_depend>
+  <build_depend>rosidl_generator_cpp</build_depend>
+  <build_depend>rosidl_typesupport_c</build_depend>
+  <build_depend>rosidl_typesupport_cpp</build_depend>
+  <build_export_depend>builtin_interfaces</build_export_depend>
+  <build_export_depend>rcl_interfaces</build_export_depend>
+  <build_export_depend>rosgraph_msgs</build_export_depend>
+  <build_export_depend>rosidl_generator_cpp</build_export_depend>
+  <build_export_depend>rosidl_typesupport_c</build_export_depend>
+  <build_export_depend>rosidl_typesupport_cpp</build_export_depend>
+
+  <depend>rcl</depend>
+  <depend>rcl_yaml_param_parser</depend>
+  <depend>rmw_implementation</depend>
+
+  <exec_depend>ament_cmake</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

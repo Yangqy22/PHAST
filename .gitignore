@@ -1,0 +1,25 @@
+# Generated locally; never include these in a source release.
+/build/
+/install/
+/log/
+/.cache/
+/.phast/
+/ros2_dashing_ws/
+/env/
+/envs/
+/venv/
+/.venv/
+__pycache__/
+*.py[cod]
+*.o
+*.a
+*.so
+*.so.*
+*.engine
+*.wts
+*.onnx
+*.pt
+core
+core.*
+.vscode/
+.idea/

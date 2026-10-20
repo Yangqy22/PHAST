@@ -1,0 +1,11 @@
+PHAST is distributed with the existing per-package license declarations:
+
+* src/rclcpp_spk: Apache License 2.0 (licenses/Apache-2.0.txt).
+  Upstream ROS 2 copyright/license notices in individual files are retained.
+* src/phast_experiments and the project-authored scripts/documentation: MIT
+  (licenses/MIT.txt).
+
+Existing third-party notices take precedence for the corresponding files.
+The paper, external SDKs, model weights and TensorRT engines are not included
+under these software licenses. See NOTICE and the README for provenance and
+external dependencies.

@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.15)
+project(phast_experiments LANGUAGES C CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp_spk REQUIRED)
+find_package(std_srvs REQUIRED)
+find_package(std_msgs REQUIRED)
+
+function(phast_experiment target source)
+  add_executable(${target} ${source})
+  target_compile_options(${target} PRIVATE -fcoroutines -g -Wall -Wextra -Wpedantic)
+  target_compile_definitions(${target} PRIVATE PHAST_CPU_ONLY=1)
+  ament_target_dependencies(${target} rclcpp_spk std_srvs std_msgs)
+  install(TARGETS ${target} DESTINATION lib/${PROJECT_NAME})
+endfunction()
+
+foreach(experiment IN ITEMS exp_baseline/exp_baseline_robospike exp_baseline/exp_baseline_ros2
+    exp_cpu/exp_cpu_robospike exp_cpu/exp_cpu_ros2 exp_cpu/exp_cpu_picas exp_cpu/exp_cpu_phast
+    exp_config/exp_config_priority exp_config/exp_config_subcallback)
+  get_filename_component(target "${experiment}" NAME)
+  phast_experiment(${target} "src/${experiment}.cpp")
+endforeach()
+
+option(PHAST_STABILITY_TESTS "Build executor stability regression checks" ON)
+if(PHAST_STABILITY_TESTS)
+  phast_experiment(executor_stability_test test/executor_stability.cpp)
+endif()
+
+# Optional reference implementation for Fig.10; not part of CPU validation.
+option(PHAST_BUILD_GPU "Build the experimental CUDA workloads" OFF)
+if(PHAST_BUILD_GPU)
+  enable_language(CUDA)
+  find_package(CUDAToolkit REQUIRED)
+  add_library(phast_gpu_workload STATIC src/exp_gpu/gpu_workload.cu)
+  set_target_properties(phast_gpu_workload PROPERTIES CUDA_STANDARD 14 CUDA_STANDARD_REQUIRED ON)
+  target_link_libraries(phast_gpu_workload PUBLIC CUDA::cudart)
+  foreach(target IN ITEMS exp_gpu_phast exp_gpu_robospike exp_gpu_ros2 exp_gpu_picas)
+    phast_experiment(${target} "src/exp_gpu/${target}.cpp")
+    target_link_libraries(${target} phast_gpu_workload CUDA::cudart)
+  endforeach()
+endif()
+ament_package()

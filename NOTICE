@@ -1,0 +1,22 @@
+PHAST — Priority-Driven Hierarchical Scheduling
+
+The executor is derived from the ROS 2 Dashing rclcpp client library and
+retains the Open Source Robotics Foundation and other upstream copyright
+notices in its source files. Upstream reference:
+https://github.com/ros2/rclcpp
+Validated Dashing source revision: 403aac966271132feadffca93dcfb24f6ab90efb
+
+ROS 2/Cyclone DDS dependencies are fetched from upstream, not vendored.
+Prepare them in a separate Dashing underlay; they remain subject to
+their own licenses. See the README for the tested dependency versions.
+
+Robot application sources, external SDKs, model weights and third-party
+binaries are not included in this release.
+
+The original project referred to ros2_tracing, ros2-picas, and ComP as
+optional dependencies. They are not initialized submodules of this release:
+https://github.com/ros2/ros2_tracing
+https://github.com/rtenlab/ros2-picas
+https://github.com/Man0xbfc00380/robospike
+The default CPU profile does not require these optional projects.
+
